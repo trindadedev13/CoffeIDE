@@ -20,10 +20,14 @@ import android.app.Activity
 import android.os.Build
 import androidx.annotation.ChecksSdkIntAtLeast
 import androidx.compose.foundation.isSystemInDarkTheme
+import androidx.compose.material3.ColorScheme
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.dynamicDarkColorScheme
+import androidx.compose.material3.dynamicLightColorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.SideEffect
+import androidx.compose.runtime.remember
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalView
@@ -34,16 +38,24 @@ import com.kyant.monet.TonalPalettes.Companion.toTonalPalettes
 import com.kyant.monet.dynamicColorScheme
 
 @Composable
+fun rememberDynamicScheme(darkTheme: Boolean = isSystemInDarkTheme()): ColorScheme {
+  val context = LocalContext.current
+  return remember {
+    if (darkTheme) dynamicDarkColorScheme(context) else dynamicLightColorScheme(context)
+  }
+}
+
+@Composable
 fun CoffeIDETheme(
   darkTheme: Boolean = isSystemInDarkTheme(),
   highContrastDarkTheme: Boolean = false,
-  dynamicColor: Boolean = true,
+  dynamicColor: Boolean = supportsDynamicTheming(),
   seedColor: Color = Color(0xFF2D140D),
   content: @Composable () -> Unit,
 ) {
   val brownTonalPalettes = seedColor.toTonalPalettes(style = PaletteStyle.Vibrant)
-
-  CompositionLocalProvider(LocalTonalPalettes provides brownTonalPalettes) {
+  val tonalPalettes = if (dynamicColor) rememberDynamicScheme().toTonalPalettes() else brownTonalPalettes
+  CompositionLocalProvider(LocalTonalPalettes provides tonalPalettes) {
     val colorScheme =
       dynamicColorScheme(!darkTheme).run {
         if (highContrastDarkTheme && darkTheme)
@@ -73,6 +85,8 @@ fun CoffeIDETheme(
 
     MaterialTheme(
       colorScheme = colorScheme,
+      typography = Typography,
+      shapes = Shapes,
       content = content
     )
   }

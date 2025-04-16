@@ -18,4 +18,8 @@ package dev.trindadedev.coffeide.navigation.routes
 
 import kotlinx.serialization.Serializable
 
-@Serializable object HomeRoute
+interface Route
+
+@Serializable object HomeRoute : Route
+
+@Serializable object EditorRoute : Route

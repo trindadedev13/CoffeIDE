@@ -1,4 +1,4 @@
-package dev.trindadedev.coffeide
+package dev.trindadedev.coffeide.ui.screens.home.project.list
 
 /*
  * Copyright 2025 Coffe-IDE.
@@ -16,6 +16,8 @@ package dev.trindadedev.coffeide
  * limitations under the License.
  */
 
-typealias Strings = dev.trindadedev.coffeide.R.string
+import dev.trindadedev.coffeide.project.Project
 
-typealias Arrays = dev.trindadedev.coffeide.R.array
+data class ProjectsListUIState(
+  val projects: List<Project> = emptyList()
+)

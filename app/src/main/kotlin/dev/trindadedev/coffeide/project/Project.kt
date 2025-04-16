@@ -1,4 +1,4 @@
-package dev.trindadedev.coffeide
+package dev.trindadedev.coffeide.project
 
 /*
  * Copyright 2025 Coffe-IDE.
@@ -16,6 +16,11 @@ package dev.trindadedev.coffeide
  * limitations under the License.
  */
 
-typealias Strings = dev.trindadedev.coffeide.R.string
+import kotlinx.serialization.Serializable
+import kotlinx.serialization.SerialName
 
-typealias Arrays = dev.trindadedev.coffeide.R.array
+@Serializable
+data class Project(
+  @SerialName("project_name")
+  var name: String? = null
+)

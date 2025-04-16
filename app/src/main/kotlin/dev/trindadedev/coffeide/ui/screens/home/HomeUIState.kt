@@ -1,4 +1,4 @@
-package dev.trindadedev.coffeide.ui.animations.navigation
+package dev.trindadedev.coffeide.ui.screens.home
 
 /*
  * Copyright 2025 Coffe-IDE.
@@ -16,10 +16,6 @@ package dev.trindadedev.coffeide.ui.animations.navigation
  * limitations under the License.
  */
 
-/*
- * values used in NavigationAnimationTransitions
- */
-object NavigationAnimationValues {
-  const val SlideDistance: Int = 50
-  const val SlideDuration: Int = 400
-}
+data class HomeUIState(
+  val isCreateProjectDialogOpen: Boolean = false
+)

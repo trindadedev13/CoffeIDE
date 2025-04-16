@@ -1,4 +1,4 @@
-package dev.trindadedev.coffeide
+package dev.trindadedev.coffeide.ui.screens.home.project.create
 
 /*
  * Copyright 2025 Coffe-IDE.
@@ -16,6 +16,17 @@ package dev.trindadedev.coffeide
  * limitations under the License.
  */
 
-typealias Strings = dev.trindadedev.coffeide.R.string
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
+import androidx.lifecycle.ViewModel
 
-typealias Arrays = dev.trindadedev.coffeide.R.array
+class CreateProjectViewModel: ViewModel() {
+  private var _uiState by mutableStateOf(CreateProjectUIState())
+  val uiState: CreateProjectUIState
+    get() = _uiState
+
+  fun setProjectName(newProjectName: String) {
+    _uiState = _uiState.copy(projectName = newProjectName)
+  }
+}

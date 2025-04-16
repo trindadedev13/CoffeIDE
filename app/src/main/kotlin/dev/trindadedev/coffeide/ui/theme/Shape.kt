@@ -1,4 +1,4 @@
-package dev.trindadedev.coffeide
+package dev.trindadedev.coffeide.ui.theme
 
 /*
  * Copyright 2025 Coffe-IDE.
@@ -16,6 +16,6 @@ package dev.trindadedev.coffeide
  * limitations under the License.
  */
 
-typealias Strings = dev.trindadedev.coffeide.R.string
+import androidx.compose.material3.Shapes
 
-typealias Arrays = dev.trindadedev.coffeide.R.array
+val Shapes = Shapes()

@@ -50,17 +50,15 @@ android {
 }
 
 dependencies {
-  implementation(platform(libs.compose.bom))
+  implementation(libs.bundles.compose)
+  implementation(libs.compose.navigation)
   
   implementation(libs.androidx.core.ktx)
   implementation(libs.androidx.core.splashscreen)
   implementation(libs.androidx.lifecycle.runtime.ktx)
-    
-  implementation(libs.compose.material.motion.core)
-  implementation(libs.compose.coil)
-    
-  implementation(libs.coil.network.okhttp)
-    
+
+  implementation(libs.compose.ui.text.google.fonts)
+
   implementation(libs.kotlinx.serialization.json)
     
   implementation(libs.koin.android)
