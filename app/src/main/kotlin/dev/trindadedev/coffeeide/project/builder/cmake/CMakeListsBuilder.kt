@@ -43,7 +43,7 @@ fun CMakeListsBuilder.comment(comment: String) {
 }
 
 fun CMakeListsBuilder.lineBreak() {
-  addLine("\n")
+  addLine("")
 }
 
 class CMakeListsBuilder {
