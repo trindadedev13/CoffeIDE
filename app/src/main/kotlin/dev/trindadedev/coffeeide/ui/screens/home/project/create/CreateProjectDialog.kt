@@ -16,6 +16,7 @@ package dev.trindadedev.coffeeide.ui.screens.home.project.create
  * limitations under the License.
  */
 
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
@@ -26,6 +27,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import dev.trindadedev.coffeeide.Strings
+import dev.trindadedev.coffeeide.ui.theme.OutlinedTextFieldShape
 
 @Composable
 fun CreateProjectDialog(
@@ -60,16 +62,19 @@ private fun CreateProjectDialogImpl(
       Text(text = stringResource(id = Strings.text_new_project))
     },
     text = {
-      OutlinedTextField(
-        value = viewModel.uiState.projectName,
-        onValueChange = { viewModel.setProjectName(it) },
-        label = { Text(text = stringResource(id = Strings.text_project_name)) },
-        placeholder = { Text(text = "My Project") },
-        singleLine = true,
-        modifier = Modifier
-            .fillMaxWidth(),
-        isError = viewModel.uiState.isError,
-      )
+      Column {
+        OutlinedTextField(
+          value = viewModel.uiState.projectName,
+          onValueChange = { viewModel.setProjectName(it) },
+          label = { Text(text = stringResource(id = Strings.text_project_name)) },
+          placeholder = { Text(text = "My Project") },
+          singleLine = true,
+          modifier = Modifier
+              .fillMaxWidth(),
+          isError = viewModel.uiState.isError,
+          shape = OutlinedTextFieldShape
+        )
+      }
     },
     confirmButton = {
       Button(
