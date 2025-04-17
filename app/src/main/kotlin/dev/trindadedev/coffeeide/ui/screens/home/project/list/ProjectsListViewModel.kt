@@ -18,14 +18,13 @@ package dev.trindadedev.coffeeide.ui.screens.home.project.list
 
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import dev.trindadedev.coffeeide.Paths
 import dev.trindadedev.coffeeide.coffeeProjectsPath
 import dev.trindadedev.coffeeide.project.Project
 
-class ProjectsListViewModel: ViewModel() {
+class ProjectsListViewModel : ViewModel() {
   private var _uiState by mutableStateOf(ProjectsListUIState())
   val uiState: ProjectsListUIState
     get() = _uiState

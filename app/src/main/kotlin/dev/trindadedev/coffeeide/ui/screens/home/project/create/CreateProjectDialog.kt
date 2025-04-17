@@ -18,7 +18,6 @@ package dev.trindadedev.coffeeide.ui.screens.home.project.create
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.OutlinedTextField
@@ -59,9 +58,7 @@ private fun CreateProjectDialogImpl(
   EnhancedAlertDialog(
     modifier = modifier,
     onDismissRequest = onClose,
-    title = {
-      Text(text = stringResource(id = Strings.text_new_project))
-    },
+    title = { Text(text = stringResource(id = Strings.text_new_project)) },
     text = {
       Column {
         OutlinedTextField(
@@ -70,26 +67,19 @@ private fun CreateProjectDialogImpl(
           label = { Text(text = stringResource(id = Strings.text_project_name)) },
           placeholder = { Text(text = "My Project") },
           singleLine = true,
-          modifier = Modifier
-              .fillMaxWidth(),
+          modifier = Modifier.fillMaxWidth(),
           isError = viewModel.uiState.isError,
-          shape = OutlinedTextFieldShape
+          shape = OutlinedTextFieldShape,
         )
       }
     },
     confirmButton = {
-      Button(
-        onClick = {
-          if (!viewModel.uiState.isError) onCreate() else onError()
-        }
-      ) {
+      Button(onClick = { if (!viewModel.uiState.isError) onCreate() else onError() }) {
         Text(text = stringResource(id = Strings.text_create))
       }
     },
     dismissButton = {
-      OutlinedButton(onClick = onClose) {
-        Text(text = stringResource(id = Strings.text_cancel))
-      }
+      OutlinedButton(onClick = onClose) { Text(text = stringResource(id = Strings.text_cancel)) }
     },
   )
 }

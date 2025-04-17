@@ -16,6 +16,4 @@ package dev.trindadedev.coffeeide.ui.screens.home
  * limitations under the License.
  */
 
-data class HomeUIState(
-  val isCreateProjectDialogOpen: Boolean = false
-)
+data class HomeUIState(val isCreateProjectDialogOpen: Boolean = false)

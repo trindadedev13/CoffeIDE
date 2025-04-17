@@ -22,5 +22,4 @@ import androidx.compose.ui.unit.dp
 
 val Shapes = Shapes()
 
-val OutlinedTextFieldShape =
-  RoundedCornerShape(12.dp)
+val OutlinedTextFieldShape = RoundedCornerShape(12.dp)

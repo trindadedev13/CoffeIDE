@@ -21,10 +21,9 @@ import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.animation.scaleIn
 import androidx.compose.animation.scaleOut
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.imePadding
+import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material.icons.Icons
@@ -49,8 +48,8 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import dev.trindadedev.coffeeide.Strings
 import dev.trindadedev.coffeeide.ui.components.appbar.CoffeeTopAppBar
 import dev.trindadedev.coffeeide.ui.components.toast.LocalToastHostState
-import dev.trindadedev.coffeeide.ui.screens.home.project.create.CreateProjectViewModel
 import dev.trindadedev.coffeeide.ui.screens.home.project.create.CreateProjectDialog
+import dev.trindadedev.coffeeide.ui.screens.home.project.create.CreateProjectViewModel
 import dev.trindadedev.coffeeide.ui.screens.home.project.list.ProjectsList
 import dev.trindadedev.coffeeide.ui.screens.home.project.list.ProjectsListViewModel
 import kotlinx.coroutines.launch
@@ -60,24 +59,20 @@ import kotlinx.coroutines.launch
 fun HomeScreen(
   viewModel: HomeViewModel = viewModel(),
   createProjectViewModel: CreateProjectViewModel = viewModel(),
-  projectsListViewModel: ProjectsListViewModel = viewModel()
+  projectsListViewModel: ProjectsListViewModel = viewModel(),
 ) {
   val context = LocalContext.current
   val scrollBehavior = TopAppBarDefaults.exitUntilCollapsedScrollBehavior()
   val coroutineScope = rememberCoroutineScope()
   val toastHostState = LocalToastHostState.current
   val lazyListState = rememberLazyListState()
-  val fabVisible by remember {
-    derivedStateOf {
-      lazyListState.firstVisibleItemScrollOffset <= 10
-    }
-  }
+  val fabVisible by remember { derivedStateOf { lazyListState.firstVisibleItemScrollOffset <= 10 } }
 
   Scaffold(
-    modifier = Modifier
-      .navigationBarsPadding()
-      .imePadding()
-      .nestedScroll(scrollBehavior.nestedScrollConnection),
+    modifier =
+      Modifier.navigationBarsPadding()
+        .imePadding()
+        .nestedScroll(scrollBehavior.nestedScrollConnection),
     topBar = {
       CoffeeTopAppBar(
         title = { Text(text = stringResource(id = Strings.app_name)) },
@@ -89,21 +84,26 @@ fun HomeScreen(
       AnimatedVisibility(
         visible = fabVisible,
         enter = fadeIn() + scaleIn(),
-        exit = fadeOut() + scaleOut()
+        exit = fadeOut() + scaleOut(),
       ) {
         ExtendedFloatingActionButton(
           onClick = { viewModel.openCreateProjectDialog() },
-          icon = { Icon(Icons.Filled.Add, contentDescription = stringResource(id = Strings.text_new_project)) },
+          icon = {
+            Icon(
+              Icons.Filled.Add,
+              contentDescription = stringResource(id = Strings.text_new_project),
+            )
+          },
           text = { Text(text = stringResource(id = Strings.text_new_project)) },
         )
       }
     },
   ) { innerPadding ->
     ProjectsList(
-      modifier = Modifier
-        .padding(innerPadding)
-        .fillMaxSize()
-        .nestedScroll(scrollBehavior.nestedScrollConnection),
+      modifier =
+        Modifier.padding(innerPadding)
+          .fillMaxSize()
+          .nestedScroll(scrollBehavior.nestedScrollConnection),
       lazyListState = lazyListState,
       viewModel = projectsListViewModel,
       onProjectClick = { project ->
@@ -113,7 +113,7 @@ fun HomeScreen(
             icon = Icons.Filled.Error,
           )
         }
-      }
+      },
     )
 
     if (viewModel.uiState.isCreateProjectDialogOpen) {
@@ -128,7 +128,7 @@ fun HomeScreen(
               icon = Icons.Filled.Error,
             )
           }
-        }
+        },
       )
     }
   }

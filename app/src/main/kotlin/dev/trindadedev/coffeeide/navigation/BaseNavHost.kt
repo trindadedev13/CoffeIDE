@@ -28,10 +28,10 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
+import dev.trindadedev.coffeeide.ui.animations.navigation.NavigationAnimationTransitions
 import kotlin.jvm.JvmSuppressWildcards
 import kotlin.reflect.KClass
 import kotlin.reflect.KType
-import dev.trindadedev.coffeeide.ui.animations.navigation.NavigationAnimationTransitions
 
 /** The Transition used in NavHost. */
 private val TransitionAnimation = NavigationAnimationTransitions.SlideFade

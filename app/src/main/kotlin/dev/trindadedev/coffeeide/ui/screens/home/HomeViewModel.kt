@@ -25,7 +25,7 @@ import dev.trindadedev.coffeeide.project.manage.ProjectManager
 import dev.trindadedev.coffeeide.ui.screens.home.project.create.CreateProjectViewModel
 import dev.trindadedev.coffeeide.ui.screens.home.project.list.ProjectsListViewModel
 
-class HomeViewModel: ViewModel() {
+class HomeViewModel : ViewModel() {
   private var _uiState by mutableStateOf(HomeUIState())
   val uiState: HomeUIState
     get() = _uiState
@@ -40,7 +40,7 @@ class HomeViewModel: ViewModel() {
 
   fun createProject(
     createProjectViewModel: CreateProjectViewModel,
-    projectsListViewModel: ProjectsListViewModel
+    projectsListViewModel: ProjectsListViewModel,
   ) {
     val project = Project(name = createProjectViewModel.uiState.projectName)
     ProjectManager.instance.create(project)

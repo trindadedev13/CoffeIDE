@@ -18,7 +18,4 @@ package dev.trindadedev.coffeeide.ui.screens.editor
 
 import androidx.compose.runtime.Composable
 
-@Composable
-fun EditorScreen() {
-
-}
+@Composable fun EditorScreen() {}

@@ -40,10 +40,7 @@ abstract class BaseComponentActivity : ComponentActivity() {
     super.onCreate(savedInstanceState)
     setContent {
       CoffeeIDETheme {
-        Surface(
-          modifier = Modifier.fillMaxSize(),
-          color = MaterialTheme.colorScheme.background
-        ) {
+        Surface(modifier = Modifier.fillMaxSize(), color = MaterialTheme.colorScheme.background) {
           ProvideMainCompositionLocals {
             onScreenCreated(savedInstanceState)
             ToastHost()
@@ -53,8 +50,7 @@ abstract class BaseComponentActivity : ComponentActivity() {
     }
   }
 
-  @Composable
-  public abstract fun onScreenCreated(savedInstanceState: Bundle?)
+  @Composable public abstract fun onScreenCreated(savedInstanceState: Bundle?)
 
   @Composable
   private fun ProvideMainCompositionLocals(content: @Composable () -> Unit) {
@@ -63,7 +59,7 @@ abstract class BaseComponentActivity : ComponentActivity() {
     CompositionLocalProvider(
       LocalMainNavController provides navController,
       LocalToastHostState provides toastHostState,
-      content = content
+      content = content,
     )
   }
 }

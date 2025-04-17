@@ -21,7 +21,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 
-class CreateProjectViewModel: ViewModel() {
+class CreateProjectViewModel : ViewModel() {
   private var _uiState by mutableStateOf(CreateProjectUIState())
   val uiState: CreateProjectUIState
     get() = _uiState
@@ -39,12 +39,12 @@ class CreateProjectViewModel: ViewModel() {
     val projectName = uiState.projectName
     val startsWithALetter = projectName.firstOrNull()?.isLetter() ?: false
     val newIsError =
-      projectName.isEmpty()     ||
-      !startsWithALetter        ||
-      projectName.contains('@') ||
-      projectName.contains('/') ||
-      projectName.length < 1    ||
-      !projectName.matches(Regex("^[A-Za-z0-9_-]+$"))
+      projectName.isEmpty() ||
+        !startsWithALetter ||
+        projectName.contains('@') ||
+        projectName.contains('/') ||
+        projectName.length < 1 ||
+        !projectName.matches(Regex("^[A-Za-z0-9_-]+$"))
 
     _uiState = uiState.copy(isError = newIsError)
   }

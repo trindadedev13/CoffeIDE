@@ -16,7 +16,6 @@ package dev.trindadedev.coffeeide.ui.screens.home.project.list
  * limitations under the License.
  */
 
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -37,33 +36,18 @@ fun ProjectsList(
   modifier: Modifier = Modifier.fillMaxHeight(),
   lazyListState: LazyListState = rememberLazyListState(),
   viewModel: ProjectsListViewModel = viewModel(),
-  onProjectClick: (Project) -> Unit
+  onProjectClick: (Project) -> Unit,
 ) {
-  LazyColumn(
-    state = lazyListState,
-    modifier = modifier
-  ) {
+  LazyColumn(state = lazyListState, modifier = modifier) {
     items(viewModel.uiState.projects) { project ->
       Card(
-        modifier = Modifier
-          .padding(
-            start = 8.dp,
-            end = 8.dp,
-            top = 6.dp,
-            bottom = 6.dp,
-          )
-          .fillMaxWidth(),
-        onClick = { onProjectClick(project) }
+        modifier =
+          Modifier.padding(start = 8.dp, end = 8.dp, top = 6.dp, bottom = 6.dp).fillMaxWidth(),
+        onClick = { onProjectClick(project) },
       ) {
         Text(
-          modifier = Modifier
-            .padding(
-              start = 10.dp,
-              end = 10.dp,
-              top = 14.dp,
-              bottom = 14.dp,
-            ),
-          text = project.name ?: "Ghost Project"
+          modifier = Modifier.padding(start = 10.dp, end = 10.dp, top = 14.dp, bottom = 14.dp),
+          text = project.name ?: "Ghost Project",
         )
       }
     }

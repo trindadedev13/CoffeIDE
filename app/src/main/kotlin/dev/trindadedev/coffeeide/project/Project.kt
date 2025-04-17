@@ -16,11 +16,7 @@ package dev.trindadedev.coffeeide.project
  * limitations under the License.
  */
 
-import kotlinx.serialization.Serializable
 import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 
-@Serializable
-data class Project(
-  @SerialName("project_name")
-  var name: String? = null
-)
+@Serializable data class Project(@SerialName("project_name") var name: String? = null)

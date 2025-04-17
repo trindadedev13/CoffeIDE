@@ -16,7 +16,4 @@ package dev.trindadedev.coffeeide.ui.screens.home.project.create
  * limitations under the License.
  */
 
-data class CreateProjectUIState(
-  val projectName: String = "",
-  val isError: Boolean = false
-)
+data class CreateProjectUIState(val projectName: String = "", val isError: Boolean = false)

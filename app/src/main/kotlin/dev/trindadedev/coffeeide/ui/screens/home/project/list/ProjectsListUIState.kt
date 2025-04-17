@@ -18,6 +18,4 @@ package dev.trindadedev.coffeeide.ui.screens.home.project.list
 
 import dev.trindadedev.coffeeide.project.Project
 
-data class ProjectsListUIState(
-  val projects: List<Project> = emptyList()
-)
+data class ProjectsListUIState(val projects: List<Project> = emptyList())

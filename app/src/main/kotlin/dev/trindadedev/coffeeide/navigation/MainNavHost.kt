@@ -20,7 +20,6 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.compose.composable
 import dev.trindadedev.coffeeide.navigation.routes.EditorRoute
 import dev.trindadedev.coffeeide.navigation.routes.HomeRoute
-import dev.trindadedev.coffeeide.ui.animations.navigation.NavigationAnimationTransitions
 import dev.trindadedev.coffeeide.ui.platform.LocalMainNavController
 import dev.trindadedev.coffeeide.ui.screens.editor.EditorScreen
 import dev.trindadedev.coffeeide.ui.screens.home.HomeScreen
@@ -29,10 +28,7 @@ import dev.trindadedev.coffeeide.ui.screens.home.HomeScreen
 fun MainNavHost() {
   val navController = LocalMainNavController.current
 
-  BaseNavHost(
-    navController = navController,
-    startDestination = HomeRoute,
-  ) {
+  BaseNavHost(navController = navController, startDestination = HomeRoute) {
     composable<HomeRoute> { HomeScreen() }
     composable<EditorRoute> { EditorScreen() }
   }

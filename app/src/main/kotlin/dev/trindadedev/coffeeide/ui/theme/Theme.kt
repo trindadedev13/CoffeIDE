@@ -54,7 +54,8 @@ fun CoffeeIDETheme(
   content: @Composable () -> Unit,
 ) {
   val brownTonalPalettes = seedColor.toTonalPalettes(style = PaletteStyle.Vibrant)
-  val tonalPalettes = if (dynamicColor) rememberDynamicScheme().toTonalPalettes() else brownTonalPalettes
+  val tonalPalettes =
+    if (dynamicColor) rememberDynamicScheme().toTonalPalettes() else brownTonalPalettes
   CompositionLocalProvider(LocalTonalPalettes provides tonalPalettes) {
     val colorScheme =
       dynamicColorScheme(!darkTheme).run {
@@ -87,7 +88,7 @@ fun CoffeeIDETheme(
       colorScheme = colorScheme,
       typography = Typography,
       shapes = Shapes,
-      content = content
+      content = content,
     )
   }
 }

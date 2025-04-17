@@ -18,7 +18,7 @@ package dev.trindadedev.coffeeide.project.builder.cmake
 
 fun CMakeLists(
   autoLineBreak: Boolean = true,
-  block: CMakeListsBuilder.() -> Unit
+  block: CMakeListsBuilder.() -> Unit,
 ): CMakeListsBuilder {
   val builder = CMakeListsBuilder()
   builder.autoLineBreak = autoLineBreak

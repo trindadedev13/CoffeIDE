@@ -20,19 +20,18 @@ import dev.trindadedev.coffeeide.Paths
 import dev.trindadedev.coffeeide.coffeeProjectsPath
 import dev.trindadedev.coffeeide.project.Project
 import dev.trindadedev.coffeeide.project.builder.cmake.CMakeLists
-import dev.trindadedev.coffeeide.project.builder.cmake.comment
-import dev.trindadedev.coffeeide.project.builder.cmake.set
-import dev.trindadedev.coffeeide.project.builder.cmake.cmakeMinimumRequired
-import dev.trindadedev.coffeeide.project.builder.cmake.project
 import dev.trindadedev.coffeeide.project.builder.cmake.addExecutable
+import dev.trindadedev.coffeeide.project.builder.cmake.cmakeMinimumRequired
+import dev.trindadedev.coffeeide.project.builder.cmake.comment
 import dev.trindadedev.coffeeide.project.builder.cmake.lineBreak
+import dev.trindadedev.coffeeide.project.builder.cmake.project
+import dev.trindadedev.coffeeide.project.builder.cmake.set
 import java.io.File
 
 class ProjectManager private constructor() {
 
   companion object {
-    @JvmStatic
-    val instance: ProjectManager by lazy { ProjectManager() }
+    @JvmStatic val instance: ProjectManager by lazy { ProjectManager() }
   }
 
   fun create(project: Project) {
@@ -41,7 +40,8 @@ class ProjectManager private constructor() {
       fileProject.mkdirs()
     }
     val fileProjectMainC = File(fileProject, "main.c")
-    val contentProjectMainC = """
+    val contentProjectMainC =
+      """
     #include <stdio.h>
 
     int main() {
@@ -50,32 +50,35 @@ class ProjectManager private constructor() {
       printf("Powered by Coffee IDE 2025 by Aquiles Trindade.");
       return 0;
     }
-    """.trimIndent()
+    """
+        .trimIndent()
     if (!fileProjectMainC.exists()) {
       fileProjectMainC.createNewFile()
       fileProjectMainC.writeText(contentProjectMainC)
     }
     val fileProjectCMakeLists = File(fileProject, "CMakeLists.txt")
-    val contentProjectCMakeLists = CMakeLists {
-      comment("Basic CMake config")
-      comment("Powered by Coffee IDE by Aquiles Trindade")
-      lineBreak()
+    val contentProjectCMakeLists =
+      CMakeLists {
+          comment("Basic CMake config")
+          comment("Powered by Coffee IDE by Aquiles Trindade")
+          lineBreak()
 
-      cmakeMinimumRequired("3.10")
-      lineBreak()
+          cmakeMinimumRequired("3.10")
+          lineBreak()
 
-      set("PROJECT_NAME", project.name ?: "Ghost Project")
-      lineBreak()
+          set("PROJECT_NAME", project.name ?: "Ghost Project")
+          lineBreak()
 
-      comment("You can add your files here.")
-      set("SOURCE_FILES", "main.c")
-      lineBreak()
+          comment("You can add your files here.")
+          set("SOURCE_FILES", "main.c")
+          lineBreak()
 
-      project("PROJECT_NAME")
-      lineBreak()
+          project("PROJECT_NAME")
+          lineBreak()
 
-      addExecutable("PROJECT_NAME", "SOURCE_FILES")
-    }.asText()
+          addExecutable("PROJECT_NAME", "SOURCE_FILES")
+        }
+        .asText()
     if (!fileProjectCMakeLists.exists()) {
       fileProjectCMakeLists.createNewFile()
       fileProjectCMakeLists.writeText(contentProjectCMakeLists)
