@@ -21,8 +21,6 @@ import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.animation.scaleIn
 import androidx.compose.animation.scaleOut
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.navigationBarsPadding
@@ -65,8 +63,7 @@ fun HomeScreen(
   createProjectViewModel: CreateProjectViewModel = viewModel(),
   projectsListViewModel: ProjectsListViewModel = viewModel()
 ) {
-  val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior()
-  val scrollState = rememberScrollState()
+  val scrollBehavior = TopAppBarDefaults.exitUntilCollapsedScrollBehavior()
   val coroutineScope = rememberCoroutineScope()
   val toastHostState = LocalToastHostState.current
   val lazyListState = rememberLazyListState()
