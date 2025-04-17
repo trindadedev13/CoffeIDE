@@ -1,2 +1,2 @@
-# Coffe-IDE
+# Coffee-IDE
 C lang ide

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <string name="app_name">Coffe-IDE</string>
+  <string name="app_name">Coffee-IDE</string>
 
   <string name="text_new_project">New Project</string>
   <string name="text_create">Create</string>

@@ -3,8 +3,8 @@
 DIRECTORY="../" # use ../ because the script is inside the shellscript folder
 
 # Text to be replaced
-OLD_TEXT="CoffeIDETheme"
-NEW_TEXT="CoffeIDETheme"
+OLD_TEXT="Coffee"
+NEW_TEXT="Coffeee"
 
 find "$DIRECTORY" -name "scripts" -o -name ".git" -prune -o -type f -print | while read -r file; do
   sed -i "s/$OLD_TEXT/$NEW_TEXT/g" "$file"

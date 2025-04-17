@@ -38,10 +38,10 @@ kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
 # Compose
 compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 
-coffeide-application = { id = "coffeide.application", version = "unspecified" }
-coffeide-library = { id = "coffeide.library", version = "unspecified" }
-coffeide-application-compose = { id = "coffeide.application.compose", version = "unspecified" }
-coffeide-library-compose = { id = "coffeide.library.compose", version = "unspecified" }
+coffeeide-application = { id = "coffeeide.application", version = "unspecified" }
+coffeeide-library = { id = "coffeeide.library", version = "unspecified" }
+coffeeide-application-compose = { id = "coffeeide.application.compose", version = "unspecified" }
+coffeeide-library-compose = { id = "coffeeide.library.compose", version = "unspecified" }
 
 [libraries]
 

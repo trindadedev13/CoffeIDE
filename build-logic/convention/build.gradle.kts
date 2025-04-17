@@ -11,23 +11,23 @@ dependencies {
 
 gradlePlugin {
   plugins {
-    register("coffeide.application") {
-      id = "coffeide.application"
+    register("coffeeide.application") {
+      id = "coffeeide.application"
       implementationClass = "ApplicationConventionPlugin"
     }
     
-    register("coffeide.library") {
-      id = "coffeide.library"
+    register("coffeeide.library") {
+      id = "coffeeide.library"
       implementationClass = "LibraryConventionPlugin"
     }
     
-    register("coffeide.application.compose") {
-      id = "coffeide.application.compose"
+    register("coffeeide.application.compose") {
+      id = "coffeeide.application.compose"
       implementationClass = "ApplicationComposeConventionPlugin"
     }
 
-    register("coffeide.library.compose") {
-      id = "coffeide.library.compose"
+    register("coffeeide.library.compose") {
+      id = "coffeeide.library.compose"
       implementationClass = "LibraryComposeConventionPlugin"
     }
   }

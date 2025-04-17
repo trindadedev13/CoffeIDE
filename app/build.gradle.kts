@@ -1,9 +1,9 @@
-import dev.trindadedev.coffeide.build.BuildConfig
-import dev.trindadedev.coffeide.build.VersionUtils
+import dev.trindadedev.coffeeide.build.BuildConfig
+import dev.trindadedev.coffeeide.build.VersionUtils
 
 plugins {
-  alias(libs.plugins.coffeide.application)
-  alias(libs.plugins.coffeide.application.compose)
+  alias(libs.plugins.coffeeide.application)
+  alias(libs.plugins.coffeeide.application.compose)
   alias(libs.plugins.kotlin.serialization)
 }
 

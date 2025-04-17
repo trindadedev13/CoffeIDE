@@ -18,7 +18,7 @@ dependencyResolutionManagement {
   }
 }
 
-rootProject.name = "Coffe-IDE"
+rootProject.name = "Coffee-IDE"
 
 include(":app")
 include(":ui:graphics:color")

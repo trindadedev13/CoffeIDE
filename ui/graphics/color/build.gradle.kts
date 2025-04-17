@@ -1,10 +1,10 @@
 plugins {
-  alias(libs.plugins.coffeide.library)
-  alias(libs.plugins.coffeide.library.compose)
+  alias(libs.plugins.coffeeide.library)
+  alias(libs.plugins.coffeeide.library.compose)
 }
 
 android {
-  namespace = "dev.trindadedev.coffeide.ui.graphics.color"
+  namespace = "dev.trindadedev.coffeeide.ui.graphics.color"
 
   buildFeatures {
     viewBinding = true
