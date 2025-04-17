@@ -1,4 +1,4 @@
-package dev.trindadedev.coffeide
+package dev.trindadedev.coffeide.ui.screens.home
 
 /*
  * Copyright 2025 Coffe-IDE.
@@ -16,6 +16,21 @@ package dev.trindadedev.coffeide
  * limitations under the License.
  */
 
-typealias Strings = dev.trindadedev.coffeide.R.string
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
+import androidx.lifecycle.ViewModel
 
-typealias Arrays = dev.trindadedev.coffeide.R.array
+class HomeViewModel: ViewModel() {
+  private var _uiState by mutableStateOf(HomeUIState())
+  val uiState: HomeUIState
+    get() = _uiState
+
+  fun openCreateProjectDialog() {
+    _uiState = _uiState.copy(isCreateProjectDialogOpen = true)
+  }
+
+  fun closeCreateProjectDialog() {
+    _uiState = _uiState.copy(isCreateProjectDialogOpen = false)
+  }
+}

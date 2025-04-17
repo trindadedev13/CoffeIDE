@@ -11,16 +11,16 @@ androidx-core-splashscreen = "1.0.1"
 androidx-core-ktx = "1.15.0"
 androidx-lifecycle-runtime-ktx = "2.8.7"
 
-compose-bom = "2025.02.00"  
 compose-activity = "1.10.1"
-compose-navigation = "2.8.8"
-compose-material-motion = "2.0.1"
-compose-material-icons = "1.7.8"
+compose-navigation = "2.8.7"
 compose-viewmodel = "2.8.7"
+compose-material-icons-extended = "1.7.8"
+compose-version = "1.8.0-rc01"
+compose-scrolleffect = "1.0.1"
+compose-material3 = "1.4.0-alpha10"
 
 kotlin-serialization-json = "1.8.0"
 
-coil-kt = "3.1.0"
 koin = "4.0.2"
 
 ksp = "2.1.10-1.0.31"
@@ -46,19 +46,19 @@ coffeide-library-compose = { id = "coffeide.library.compose", version = "unspeci
 [libraries]
 
 # Compose
-compose-bom = { group = "androidx.compose", name = "compose-bom", version.ref = "compose-bom" }
-compose-material = { group = "androidx.compose.material", name = "material" }
-compose-material3 = { group = "androidx.compose.material3", name = "material3" }
-compose-ui = { group = "androidx.compose.ui", name = "ui" }
-compose-ui-graphics = { group = "androidx.compose.ui", name = "ui-graphics"}
+compose-foundation = { group = "androidx.compose.foundation", name = "foundation", version.ref = "compose-version" }
+compose-foundation-layout = { group = "androidx.compose.foundation", name = "foundation-layout", version.ref = "compose-version" }
+compose-runtime = { group = "androidx.compose.runtime", name = "runtime", version.ref = "compose-version" }
+compose-material = { group = "androidx.compose.material", name = "material", version.ref = "compose-version" }
+compose-material3 = { group = "androidx.compose.material3", name = "material3", version.ref = "compose-material3" }
+compose-ui = { group = "androidx.compose.ui", name = "ui", version.ref = "compose-version" }
+compose-ui-text-google-fonts = { group = "androidx.compose.ui", name = "ui-text-google-fonts", version.ref = "compose-version" }
+compose-ui-graphics = { group = "androidx.compose.ui", name = "ui-graphics", version.ref = "compose-version"}
 compose-activity = { group = "androidx.activity", name = "activity-compose", version.ref = "compose-activity" }
 compose-viewmodel = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-compose", version.ref = "compose-viewmodel" }
 compose-navigation = { group = "androidx.navigation", name = "navigation-compose", version.ref = "compose-navigation" }
-compose-material-motion-core = { group = "io.github.fornewid", name = "material-motion-compose-core", version.ref = "compose-material-motion" }
-compose-material-icons = { group = "androidx.compose.material", name = "material-icons-extended", version.ref = "compose-material-icons" }
-compose-coil = { group = "io.coil-kt.coil3", name = "coil-compose", version.ref = "coil-kt" }
-
-coil-network-okhttp = { group = "io.coil-kt.coil3", name = "coil-network-okhttp", version.ref = "coil-kt" }
+compose-material-icons = { module = "androidx.compose.material:material-icons-extended", version.ref = "compose-material-icons-extended" }
+compose-scrolleffect = { group = "com.github.trindadedev13", name = "ScrollEffect", version.ref = "compose-scrolleffect" }
 
 # AndroidX Core
 androidx-core-splashscreen = { group = "androidx.core", name = "core-splashscreen", version.ref = "androidx-core-splashscreen" }
@@ -78,3 +78,16 @@ android-gradle = { module = "com.android.tools.build:gradle", version.ref = "agp
 compose-gradle = { module = "org.jetbrains.kotlin:compose-compiler-gradle-plugin", version.ref = "kotlin" }
 kotlin-gradle = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
 ksp-gradle = { module = "com.google.devtools.ksp:com.google.devtools.ksp.gradle.plugin", version.ref = "ksp" }
+
+[bundles]
+compose = [
+    "compose-foundation",
+    "compose-foundation-layout",
+    "compose-runtime",
+    "compose-material",
+    "compose-material3",
+    "compose-ui",
+    "compose-ui-graphics",
+    "compose-activity",
+    "compose-material-icons",
+]

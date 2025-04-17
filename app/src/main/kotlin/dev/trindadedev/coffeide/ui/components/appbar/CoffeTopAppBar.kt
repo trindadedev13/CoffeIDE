@@ -1,4 +1,4 @@
-package dev.trindadedev.coffeide.ui.components
+package dev.trindadedev.coffeide.ui.components.appbar
 
 /*
  * Copyright 2025 Coffe-IDE.
@@ -28,7 +28,7 @@ import androidx.compose.runtime.Composable
  */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun TopBar(
+fun CoffeTopAppBar(
   title: @Composable () -> Unit,
   scrollBehavior: TopAppBarScrollBehavior,
   navigationIcon: @Composable (() -> Unit)? = null,

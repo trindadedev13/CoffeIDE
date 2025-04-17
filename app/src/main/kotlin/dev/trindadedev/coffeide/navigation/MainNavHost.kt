@@ -17,25 +17,23 @@ package dev.trindadedev.coffeide.navigation
  */
 
 import androidx.compose.runtime.Composable
-import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import dev.trindadedev.coffeide.navigation.routes.EditorRoute
 import dev.trindadedev.coffeide.navigation.routes.HomeRoute
 import dev.trindadedev.coffeide.ui.animations.navigation.NavigationAnimationTransitions
 import dev.trindadedev.coffeide.ui.platform.LocalMainNavController
+import dev.trindadedev.coffeide.ui.screens.editor.EditorScreen
 import dev.trindadedev.coffeide.ui.screens.home.HomeScreen
 
 @Composable
 fun MainNavHost() {
   val navController = LocalMainNavController.current
 
-  NavHost(
+  BaseNavHost(
     navController = navController,
     startDestination = HomeRoute,
-    enterTransition = { NavigationAnimationTransitions.enterTransition },
-    exitTransition = { NavigationAnimationTransitions.exitTransition },
-    popEnterTransition = { NavigationAnimationTransitions.popEnterTransition },
-    popExitTransition = { NavigationAnimationTransitions.popExitTransition },
   ) {
     composable<HomeRoute> { HomeScreen() }
+    composable<EditorRoute> { EditorScreen() }
   }
 }

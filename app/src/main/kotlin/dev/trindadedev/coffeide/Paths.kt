@@ -16,6 +16,15 @@ package dev.trindadedev.coffeide
  * limitations under the License.
  */
 
-typealias Strings = dev.trindadedev.coffeide.R.string
+import android.os.Environment
+import java.io.File
 
-typealias Arrays = dev.trindadedev.coffeide.R.array
+object Paths
+
+/** the coffeide public folder in public storage */
+val Paths.coffePublicPath: File
+  get() = File(Environment.getExternalStorageDirectory(), "CoffeIDE")
+
+/** the coffeide projects folder in public storage */
+val Paths.coffeProjectsPath: File
+  get() = File(Paths.coffePublicPath, "Projects")
