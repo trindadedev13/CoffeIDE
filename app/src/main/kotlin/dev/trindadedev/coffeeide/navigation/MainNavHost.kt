@@ -17,12 +17,15 @@ package dev.trindadedev.coffeeide.navigation
  */
 
 import androidx.compose.runtime.Composable
+import androidx.navigation.NavType
+import androidx.navigation.toRoute
 import androidx.navigation.compose.composable
 import dev.trindadedev.coffeeide.navigation.routes.EditorRoute
 import dev.trindadedev.coffeeide.navigation.routes.HomeRoute
 import dev.trindadedev.coffeeide.ui.platform.LocalMainNavController
 import dev.trindadedev.coffeeide.ui.screens.editor.EditorScreen
 import dev.trindadedev.coffeeide.ui.screens.home.HomeScreen
+import kotlin.reflect.typeOf
 
 @Composable
 fun MainNavHost() {
@@ -30,6 +33,9 @@ fun MainNavHost() {
 
   BaseNavHost(navController = navController, startDestination = HomeRoute) {
     composable<HomeRoute> { HomeScreen() }
-    composable<EditorRoute> { EditorScreen() }
+    composable<EditorRoute>(typeMap = mapOf(typeOf<String>() to NavType.StringType)) {
+      val route: EditorRoute = it.toRoute()
+      EditorScreen(projectPath = route.projectPath)
+    }
   }
 }

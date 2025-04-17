@@ -45,6 +45,13 @@ class HomeViewModel : ViewModel() {
     val project = Project(name = createProjectViewModel.uiState.projectName)
     ProjectManager.instance.create(project)
     closeCreateProjectDialog()
+    clear(createProjectViewModel, projectsListViewModel)
+  }
+
+  fun clear(
+    createProjectViewModel: CreateProjectViewModel,
+    projectsListViewModel: ProjectsListViewModel,
+  ) {
     projectsListViewModel.loadProjects()
     createProjectViewModel.setProjectName("")
   }

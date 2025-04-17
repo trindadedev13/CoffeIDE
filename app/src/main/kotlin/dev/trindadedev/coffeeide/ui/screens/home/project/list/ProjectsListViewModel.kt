@@ -36,7 +36,7 @@ class ProjectsListViewModel : ViewModel() {
   fun loadProjects() {
     if (!Paths.coffeeProjectsPath.exists()) Paths.coffeeProjectsPath.mkdirs()
     val projectsAsFiles = Paths.coffeeProjectsPath.listFiles { it.isDirectory }
-    val newProjects = projectsAsFiles?.map { Project(it.name) } ?: emptyList()
+    val newProjects = projectsAsFiles?.map { Project(name = it.name, path = it) } ?: emptyList()
     _uiState = _uiState.copy(projects = newProjects)
   }
 }

@@ -35,7 +35,11 @@ class ProjectManager private constructor() {
   }
 
   fun create(project: Project) {
-    val fileProject = File(Paths.coffeeProjectsPath, project.name)
+    val fileProject = project.path ?: run {
+      val a = File(Paths.coffeeProjectsPath, project.name ?: "Ghost Project")
+      project.path = a
+      a
+    }
     if (!fileProject.exists()) {
       fileProject.mkdirs()
     }

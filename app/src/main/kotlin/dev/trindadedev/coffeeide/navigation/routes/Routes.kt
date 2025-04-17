@@ -22,4 +22,4 @@ interface Route
 
 @Serializable object HomeRoute : Route
 
-@Serializable object EditorRoute : Route
+@Serializable data class EditorRoute(val projectPath: String): Route

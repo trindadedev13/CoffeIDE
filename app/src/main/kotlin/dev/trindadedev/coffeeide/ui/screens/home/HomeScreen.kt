@@ -46,8 +46,10 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.viewmodel.compose.viewModel
 import dev.trindadedev.coffeeide.Strings
+import dev.trindadedev.coffeeide.navigation.routes.EditorRoute
 import dev.trindadedev.coffeeide.ui.components.appbar.CoffeeTopAppBar
 import dev.trindadedev.coffeeide.ui.components.toast.LocalToastHostState
+import dev.trindadedev.coffeeide.ui.platform.LocalMainNavController
 import dev.trindadedev.coffeeide.ui.screens.home.project.create.CreateProjectDialog
 import dev.trindadedev.coffeeide.ui.screens.home.project.create.CreateProjectViewModel
 import dev.trindadedev.coffeeide.ui.screens.home.project.list.ProjectsList
@@ -67,6 +69,7 @@ fun HomeScreen(
   val toastHostState = LocalToastHostState.current
   val lazyListState = rememberLazyListState()
   val fabVisible by remember { derivedStateOf { lazyListState.firstVisibleItemScrollOffset <= 10 } }
+  val navController = LocalMainNavController.current
 
   Scaffold(
     modifier =
@@ -107,11 +110,8 @@ fun HomeScreen(
       lazyListState = lazyListState,
       viewModel = projectsListViewModel,
       onProjectClick = { project ->
-        coroutineScope.launch {
-          toastHostState.showToast(
-            message = "Editor not implemented yet.",
-            icon = Icons.Filled.Error,
-          )
+        project.path?.let {
+          navController.navigate(EditorRoute(it.absolutePath))
         }
       },
     )
@@ -119,7 +119,10 @@ fun HomeScreen(
     if (viewModel.uiState.isCreateProjectDialogOpen) {
       CreateProjectDialog(
         viewModel = createProjectViewModel,
-        onClose = { viewModel.closeCreateProjectDialog() },
+        onClose = {
+          viewModel.closeCreateProjectDialog()
+          viewModel.clear(createProjectViewModel, projectsListViewModel)
+        },
         onCreate = { viewModel.createProject(createProjectViewModel, projectsListViewModel) },
         onError = {
           coroutineScope.launch {

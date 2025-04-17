@@ -16,7 +16,12 @@ package dev.trindadedev.coffeeide.project
  * limitations under the License.
  */
 
+import java.io.File
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.Transient
 
-@Serializable data class Project(@SerialName("project_name") var name: String? = null)
+@Serializable data class Project(
+  @SerialName("project_name") var name: String? = null,
+  @Transient var path: File? = null,
+)
