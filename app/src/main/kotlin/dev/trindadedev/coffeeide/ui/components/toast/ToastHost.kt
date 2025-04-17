@@ -218,14 +218,21 @@ enum class ToastDuration {
 
 object ToastDefaults {
   val transition: ContentTransform
-    get() =
-      (fadeIn(tween(300)) +
-          scaleIn(tween(500), transformOrigin = TransformOrigin(0.5f, 1f)) +
-          slideInVertically(tween(500)) { it / 2 })
-        .togetherWith(
-          fadeOut(tween(250)) +
-            slideOutVertically(tween(500)) { it / 2 } +
-            scaleOut(tween(750), transformOrigin = TransformOrigin(0.5f, 1f))
+    get() = fadeIn(tween(300)) + scaleIn(
+        animationSpec = spring(
+          dampingRatio = 0.65f,
+          stiffness = Spring.StiffnessMediumLow
+        ),
+        transformOrigin = TransformOrigin(0.5f, 1f)
+      ) + slideInVertically(
+        spring(stiffness = Spring.StiffnessHigh)
+        ) { it / 2 } togetherWith fadeOut(tween(250)) + slideOutVertically(tween(500)
+        ) { it / 2 } + scaleOut(
+            animationSpec = spring(
+                dampingRatio = Spring.DampingRatioMediumBouncy,
+                stiffness = Spring.StiffnessMediumLow
+            ),
+            transformOrigin = TransformOrigin(0.5f, 1f)
         )
 
   val contentColor: Color
