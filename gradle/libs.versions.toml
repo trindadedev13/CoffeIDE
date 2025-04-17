@@ -19,7 +19,7 @@ compose-version = "1.8.0-rc03"
 compose-scrolleffect = "1.0.1"
 compose-material3 = "1.4.0-alpha12"
 
-kotlin-serialization-json = "1.8.0"
+kotlin-serialization-json = "1.8.1"
 
 koin = "4.0.2"
 
