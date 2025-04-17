@@ -16,42 +16,52 @@ package dev.trindadedev.coffeeide.project.builder.cmake
  * limitations under the License.
  */
 
-fun CMakeLists(block: CMakeListsBuilder.() -> Unit): CMakeListsBuilder {
+fun CMakeLists(
+  autoLineBreak: Boolean = true,
+  block: CMakeListsBuilder.() -> Unit
+): CMakeListsBuilder {
   val builder = CMakeListsBuilder()
+  builder.autoLineBreak = autoLineBreak
   builder.block()
   return builder
 }
 
 fun CMakeListsBuilder.cmakeMinimumRequired(version: String) {
-  addLine("cmake_minimum_required(VERSION $version)")
+  add("cmake_minimum_required(VERSION $version)")
+  if (autoLineBreak) lineBreak()
 }
 
 fun CMakeListsBuilder.set(variable: String, value: String) {
-  addLine("set($variable $value)")
+  add("set($variable $value)")
+  if (autoLineBreak) lineBreak()
 }
 
 fun CMakeListsBuilder.project(nameVar: String) {
-  addLine("project(\${$nameVar})")
+  add("project(\${$nameVar})")
+  if (autoLineBreak) lineBreak()
 }
 
 fun CMakeListsBuilder.addExecutable(targetVar: String, sourcesVar: String) {
-  addLine("add_executable(\${$targetVar} \${$sourcesVar})")
+  add("add_executable(\${$targetVar} \${$sourcesVar})")
+  if (autoLineBreak) lineBreak()
 }
 
 fun CMakeListsBuilder.comment(comment: String) {
-  addLine("# ${comment}")
+  add("# ${comment}")
+  if (autoLineBreak) lineBreak()
 }
 
 fun CMakeListsBuilder.lineBreak() {
-  addLine("")
+  add("\n")
 }
 
 class CMakeListsBuilder {
-  private val lines = mutableListOf<String>()
+  val codeBuilder = StringBuilder()
+  var autoLineBreak = true
 
-  fun addLine(line: String) {
-    lines += line
+  fun add(text: String) {
+    codeBuilder.append(text)
   }
 
-  fun asText(): String = lines.joinToString("\n")
+  fun asText(): String = codeBuilder.toString()
 }
