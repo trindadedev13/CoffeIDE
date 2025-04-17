@@ -40,13 +40,23 @@ fun ProjectsList(
     items(viewModel.uiState.projects) { project ->
       Card(
         modifier = Modifier
-          .padding(8.dp)
+          .padding(
+            start = 8.dp,
+            end = 8.dp,
+            top = 12.dp,
+            bottom = 12.dp,
+          )
           .fillMaxWidth(),
         onClick = { onProjectClick(project) }
       ) {
         Text(
           modifier = Modifier
-            .padding(10.dp),
+            .padding(
+              start = 10.dp,
+              end = 10.dp,
+              top = 14.dp,
+              bottom = 14.dp,
+            ),
           text = project.name ?: "Ghost Project"
         )
       }
