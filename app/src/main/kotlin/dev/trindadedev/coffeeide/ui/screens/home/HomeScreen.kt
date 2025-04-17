@@ -16,13 +16,19 @@ package dev.trindadedev.coffeeide.ui.screens.home
  * limitations under the License.
  */
 
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
+import androidx.compose.animation.scaleIn
+import androidx.compose.animation.scaleOut
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.imePadding
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.verticalScroll
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Error
@@ -33,6 +39,9 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.derivedStateOf
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
@@ -60,6 +69,12 @@ fun HomeScreen(
   val scrollState = rememberScrollState()
   val coroutineScope = rememberCoroutineScope()
   val toastHostState = LocalToastHostState.current
+  val lazyListState = rememberLazyListState()
+  val fabVisible by remember {
+    derivedStateOf {
+      lazyListState.firstVisibleItemScrollOffset <= 10
+    }
+  }
 
   Scaffold(
     modifier = Modifier
@@ -74,17 +89,25 @@ fun HomeScreen(
       )
     },
     floatingActionButton = {
-      ExtendedFloatingActionButton(
-        onClick = { viewModel.openCreateProjectDialog() },
-        icon = { Icon(Icons.Filled.Add, contentDescription = stringResource(id = Strings.text_new_project)) },
-        text = { Text(text = stringResource(id = Strings.text_new_project)) },
-      )
+      AnimatedVisibility(
+        visible = fabVisible,
+        enter = fadeIn() + scaleIn(),
+        exit = fadeOut() + scaleOut()
+      ) {
+        ExtendedFloatingActionButton(
+          onClick = { viewModel.openCreateProjectDialog() },
+          icon = { Icon(Icons.Filled.Add, contentDescription = stringResource(id = Strings.text_new_project)) },
+          text = { Text(text = stringResource(id = Strings.text_new_project)) },
+        )
+      }
     },
   ) { innerPadding ->
     ProjectsList(
       modifier = Modifier
         .padding(innerPadding)
-        .fillMaxSize(),
+        .fillMaxSize()
+        .nestedScroll(scrollBehavior.nestedScrollConnection),
+      lazyListState = lazyListState,
       viewModel = projectsListViewModel,
       onProjectClick = { project ->
         coroutineScope.launch {
