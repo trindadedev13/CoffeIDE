@@ -25,9 +25,8 @@ import dev.trindadedev.coffeeide.project.builder.cmake.set
 import dev.trindadedev.coffeeide.project.builder.cmake.cmakeMinimumRequired
 import dev.trindadedev.coffeeide.project.builder.cmake.project
 import dev.trindadedev.coffeeide.project.builder.cmake.addExecutable
+import dev.trindadedev.coffeeide.project.builder.cmake.lineBreak
 import java.io.File
-import kotlinx.serialization.json.Json
-import kotlinx.serialization.decodeFromString
 
 class ProjectManager private constructor() {
 
@@ -51,7 +50,7 @@ class ProjectManager private constructor() {
       printf("Powered by Coffee IDE 2025 by Aquiles Trindade.");
       return 0;
     }
-    """
+    """.trimIndent()
     if (!fileProjectMainC.exists()) {
       fileProjectMainC.createNewFile()
       fileProjectMainC.writeText(contentProjectMainC)
@@ -60,13 +59,21 @@ class ProjectManager private constructor() {
     val contentProjectCMakeLists = CMakeLists {
       comment("Basic CMake config")
       comment("Powered by Coffee IDE by Aquiles Trindade")
+      lineBreak()
+
       cmakeMinimumRequired("3.10")
+      lineBreak()
 
       set("PROJECT_NAME", project.name ?: "Ghost Project")
+      lineBreak()
+
       comment("You can add your files here.")
       set("SOURCE_FILES", "main.c")
+      lineBreak()
 
       project("PROJECT_NAME")
+      lineBreak()
+
       addExecutable("PROJECT_NAME", "SOURCE_FILES")
     }.asText()
     if (!fileProjectCMakeLists.exists()) {
@@ -77,8 +84,7 @@ class ProjectManager private constructor() {
 
   fun readFromPath(path: File): Project? {
     if (path.exists()) {
-      val json = path.readText()
-      val project = Json.decodeFromString<Project>(json)
+      return Project(name = path.name)
     }
     return null
   }

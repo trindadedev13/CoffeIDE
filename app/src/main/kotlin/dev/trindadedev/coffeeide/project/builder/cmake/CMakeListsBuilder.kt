@@ -42,6 +42,10 @@ fun CMakeListsBuilder.comment(comment: String) {
   addLine("# ${comment}")
 }
 
+fun CMakeListsBuilder.lineBreak() {
+  addLine("\n")
+}
+
 class CMakeListsBuilder {
   private val lines = mutableListOf<String>()
 
