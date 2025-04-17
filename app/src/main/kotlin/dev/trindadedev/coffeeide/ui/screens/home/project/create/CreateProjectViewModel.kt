@@ -26,7 +26,26 @@ class CreateProjectViewModel: ViewModel() {
   val uiState: CreateProjectUIState
     get() = _uiState
 
+  init {
+    checkError()
+  }
+
   fun setProjectName(newProjectName: String) {
-    _uiState = _uiState.copy(projectName = newProjectName)
+    _uiState = uiState.copy(projectName = newProjectName)
+    checkError()
+  }
+
+  fun checkError() {
+    val projectName = uiState.projectName
+    val startsWithALetter = projectName.firstOrNull()?.isLetter() ?: false
+    val newIsError =
+      projectName.isEmpty()     ||
+      !startsWithALetter        ||
+      projectName.contains('@') ||
+      projectName.contains('/') ||
+      projectName.length < 1    ||
+      !projectName.matches(Regex("^[A-Za-z0-9_-]+$"))
+
+    _uiState = uiState.copy(isError = newIsError)
   }
 }

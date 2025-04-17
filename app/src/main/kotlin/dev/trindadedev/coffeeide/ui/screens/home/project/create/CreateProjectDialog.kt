@@ -33,13 +33,15 @@ fun CreateProjectDialog(
   viewModel: CreateProjectViewModel,
   onClose: () -> Unit,
   onCreate: () -> Unit,
+  onError: () -> Unit,
 ) {
   val uiState = viewModel.uiState
   CreateProjectDialogImpl(
     modifier = modifier,
     viewModel = viewModel,
     onClose = onClose,
-    onCreate = onCreate
+    onCreate = onCreate,
+    onError = onError,
   )
 }
 
@@ -49,6 +51,7 @@ private fun CreateProjectDialogImpl(
   viewModel: CreateProjectViewModel,
   onClose: () -> Unit,
   onCreate: () -> Unit,
+  onError: () -> Unit,
 ) {
   AlertDialog(
     modifier = modifier,
@@ -65,11 +68,15 @@ private fun CreateProjectDialogImpl(
         singleLine = true,
         modifier = Modifier
             .fillMaxWidth(),
-        isError = viewModel.uiState.projectName.isNotEmpty() && !viewModel.uiState.projectName.contains('@'),
+        isError = viewModel.uiState.isError,
       )
     },
     confirmButton = {
-      Button(onClick = onCreate) {
+      Button(
+        onClick = {
+          if (!viewModel.uiState.isError) onCreate() else onError()
+        }
+      ) {
         Text(text = stringResource(id = Strings.text_create))
       }
     },

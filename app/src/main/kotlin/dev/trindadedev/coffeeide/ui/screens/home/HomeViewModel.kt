@@ -20,6 +20,10 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
+import dev.trindadedev.coffeeide.project.Project
+import dev.trindadedev.coffeeide.project.manage.ProjectManager
+import dev.trindadedev.coffeeide.ui.screens.home.project.create.CreateProjectViewModel
+import dev.trindadedev.coffeeide.ui.screens.home.project.list.ProjectsListViewModel
 
 class HomeViewModel: ViewModel() {
   private var _uiState by mutableStateOf(HomeUIState())
@@ -32,5 +36,16 @@ class HomeViewModel: ViewModel() {
 
   fun closeCreateProjectDialog() {
     _uiState = _uiState.copy(isCreateProjectDialogOpen = false)
+  }
+
+  fun createProject(
+    createProjectViewModel: CreateProjectViewModel,
+    projectsListViewModel: ProjectsListViewModel
+  ) {
+    val project = Project(name = createProjectViewModel.uiState.projectName)
+    ProjectManager.instance.create(project)
+    closeCreateProjectDialog()
+    projectsListViewModel.loadProjects()
+    createProjectViewModel.setProjectName("")
   }
 }

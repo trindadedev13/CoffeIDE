@@ -17,5 +17,6 @@ package dev.trindadedev.coffeeide.ui.screens.home.project.create
  */
 
 data class CreateProjectUIState(
-  val projectName: String = ""
+  val projectName: String = "",
+  val isError: Boolean = false
 )

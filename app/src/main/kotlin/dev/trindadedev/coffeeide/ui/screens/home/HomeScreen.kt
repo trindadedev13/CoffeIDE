@@ -43,11 +43,10 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.viewmodel.compose.viewModel
 import dev.trindadedev.coffeeide.Strings
-import dev.trindadedev.coffeeide.project.Project
-import dev.trindadedev.coffeeide.project.manage.ProjectManager
 import dev.trindadedev.coffeeide.ui.components.appbar.CoffeeTopAppBar
 import dev.trindadedev.coffeeide.ui.components.toast.LocalToastHostState
 import dev.trindadedev.coffeeide.ui.screens.home.project.create.CreateProjectViewModel
@@ -63,6 +62,7 @@ fun HomeScreen(
   createProjectViewModel: CreateProjectViewModel = viewModel(),
   projectsListViewModel: ProjectsListViewModel = viewModel()
 ) {
+  val context = LocalContext.current
   val scrollBehavior = TopAppBarDefaults.exitUntilCollapsedScrollBehavior()
   val coroutineScope = rememberCoroutineScope()
   val toastHostState = LocalToastHostState.current
@@ -120,12 +120,14 @@ fun HomeScreen(
       CreateProjectDialog(
         viewModel = createProjectViewModel,
         onClose = { viewModel.closeCreateProjectDialog() },
-        onCreate = {
-          val project = Project(name = createProjectViewModel.uiState.projectName)
-          ProjectManager.instance.create(project)
-          viewModel.closeCreateProjectDialog()
-          projectsListViewModel.loadProjects()
-          createProjectViewModel.setProjectName("")
+        onCreate = { viewModel.createProject(createProjectViewModel, projectsListViewModel) },
+        onError = {
+          coroutineScope.launch {
+            toastHostState.showToast(
+              message = context.getString(Strings.text_error_project_name),
+              icon = Icons.Filled.Error,
+            )
+          }
         }
       )
     }
