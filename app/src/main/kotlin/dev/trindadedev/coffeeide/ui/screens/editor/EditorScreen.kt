@@ -16,9 +16,32 @@ package dev.trindadedev.coffeeide.ui.screens.editor
  * limitations under the License.
  */
 
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.imePadding
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
+import dev.trindadedev.coffeeide.project.manage.ProjectManager
+import dev.trindadedev.coffeeide.ui.components.appbar.CoffeeTopAppBar
+import java.io.File
 
 @Composable
 fun EditorScreen(projectPath: String) {
-
+  val project = ProjectManager.instance.readFromPath(File(projectPath))
+  val projectName = project?.name ?: "Ghost Project"
+  Scaffold(
+    modifier = Modifier.imePadding(),
+    topBar = {
+      CoffeeTopAppBar(
+        title = { Text(text = projectName) },
+      )
+    },
+  ) { innerPadding ->
+    Column(modifier = Modifier.padding(innerPadding)) {
+      Text(text = projectName)
+      Text(text = projectPath)
+    }
+  }
 }

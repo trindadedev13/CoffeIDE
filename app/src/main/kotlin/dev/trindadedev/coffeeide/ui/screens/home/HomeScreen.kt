@@ -23,7 +23,6 @@ import androidx.compose.animation.scaleIn
 import androidx.compose.animation.scaleOut
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.imePadding
-import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material.icons.Icons
@@ -73,8 +72,7 @@ fun HomeScreen(
 
   Scaffold(
     modifier =
-      Modifier.navigationBarsPadding()
-        .imePadding()
+      Modifier.imePadding()
         .nestedScroll(scrollBehavior.nestedScrollConnection),
     topBar = {
       CoffeeTopAppBar(
